@@ -1,0 +1,549 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import BackButton from '../../../components/BackButton';
+import { getProtocolBySlug, getAllProtocolSlugs } from '../../../lib/protocolsConfig';
+
+export async function getStaticPaths() {
+  const slugs = getAllProtocolSlugs();
+  return slugs.map((slug) => ({
+    params: { slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const protocol = getProtocolBySlug(slug!);
+
+if (!protocol) {
+  return Astro.redirect('/404');
+}
+
+const tierLabels: Record<string, string> = {
+  max: "Maximum Resources",
+  average: "Average Resources",
+  limited: "Limited Resources",
+};
+---
+
+<Layout>
+  <div class="max-w-4xl mx-auto px-4 sm:px-8 md:px-12 space-y-8 optimize-rendering" style="padding-top: 5rem; padding-bottom: 5rem;">
+    <div>
+      <BackButton client:load />
+      <h1 class="text-4xl font-bold mb-4">{protocol.name}</h1>
+      <p class="text-lg text-muted-foreground mb-4">{protocol.summary}</p>
+      
+      <div class="flex flex-wrap gap-2 mb-4">
+        {protocol.tiers.map((tier) => (
+          <span
+            key={tier}
+            class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium"
+          >
+            {tierLabels[tier]}
+          </span>
+        ))}
+      </div>
+
+      <div class="flex gap-4 text-sm text-muted-foreground">
+        <span>Importance: {protocol.importance}/10</span>
+        <span>Cost: {protocol.cost}/10</span>
+        <span>Ease: {protocol.ease}/10</span>
+      </div>
+    </div>
+
+    <div class="rounded-2xl border border-slate-200/60 bg-card text-card-foreground shadow-sm">
+      <div class="flex flex-col space-y-1.5 p-6">
+        <h3 class="text-2xl font-semibold leading-none tracking-tight text-slate-800">Key Benefits</h3>
+      </div>
+      <div class="p-6 pt-0">
+        <ul class="list-disc pl-6 space-y-2">
+          {protocol.benefits.map((benefit) => (
+            <li>{benefit}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="rounded-2xl border border-slate-200/60 bg-card text-card-foreground shadow-sm">
+      <div class="flex flex-col space-y-1.5 p-6">
+        <h3 class="text-2xl font-semibold leading-none tracking-tight text-slate-800">What the Evidence Says</h3>
+      </div>
+      <div class="p-6 pt-0 space-y-4">
+        <div>
+          <h3 class="font-semibold mb-2 text-green-700">Supportive Findings</h3>
+          <ul class="list-disc pl-6 space-y-2">
+            {protocol.evidence.supportive.map((finding) => (
+              <li>{finding}</li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2 text-amber-700">Uncertainties and Limitations</h3>
+          <ul class="list-disc pl-6 space-y-2">
+            {protocol.evidence.limitations.map((limitation) => (
+              <li>{limitation}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    {protocol.risks && protocol.risks.length > 0 && (
+      <div class="rounded-2xl border border-slate-200/60 bg-card text-card-foreground shadow-sm">
+        <div class="flex flex-col space-y-1.5 p-6">
+          <h3 class="text-2xl font-semibold leading-none tracking-tight text-slate-800">Risks & Contraindications</h3>
+        </div>
+        <div class="p-6 pt-0">
+          <ul class="list-disc pl-6 space-y-2">
+            {protocol.risks.map((risk) => (
+              <li>{risk}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    )}
+
+    {protocol.slug === "nad" && (
+      <div class="rounded-2xl border border-slate-200/60 bg-card text-card-foreground shadow-sm">
+        <div class="flex flex-col space-y-1.5 p-6">
+          <h3 class="text-2xl font-semibold leading-none tracking-tight text-slate-800">NAD+ Deep Dive</h3>
+        </div>
+        <div class="p-6 pt-0 space-y-4">
+          <div>
+            <h3 class="font-semibold mb-2">Why NAD+ Matters in PD</h3>
+            <p>
+              NAD+ (nicotinamide adenine dinucleotide) is essential for mitochondrial function, energy production, and cellular repair. In Parkinson's, mitochondrial dysfunction is a core feature, and NAD+ levels may be depleted. Supporting NAD+ levels may help:
+            </p>
+            <ul class="list-disc pl-6 mt-2 space-y-1">
+              <li>Improve mitochondrial ATP production</li>
+              <li>Activate sirtuins (SIRT1, SIRT3) which support cellular repair and longevity</li>
+              <li>Support DNA repair mechanisms</li>
+              <li>Enhance cellular energy in neurons</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="font-semibold mb-2">Forms of NAD+ Support</h3>
+            <ul class="list-disc pl-6 space-y-1">
+              <li><strong>NR (Nicotinamide Riboside):</strong> Well-absorbed precursor, typically 500-1000mg 1-2x/day</li>
+              <li><strong>NMN (Nicotinamide Mononucleotide):</strong> Direct precursor, similar dosing to NR</li>
+              <li><strong>IV NAD+:</strong> Direct administration, requires medical supervision, higher cost</li>
+              <li><strong>Liposomal forms:</strong> May improve absorption of oral precursors</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="font-semibold mb-2">Dosing Strategy Examples</h3>
+            <p class="mb-2">Starting protocols (consult with healthcare provider):</p>
+            <ul class="list-disc pl-6 space-y-1">
+              <li>NR: 250-500mg once daily, increasing to 500-1000mg 1-2x/day as tolerated</li>
+              <li>NMN: Similar dosing to NR, typically 250-500mg 1-2x/day</li>
+              <li>IV NAD+: Typically administered in clinical settings, dosing varies</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="font-semibold mb-2">How It Stacks With Other Interventions</h3>
+            <p>
+              NAD+ support may work synergistically with:
+            </p>
+            <ul class="list-disc pl-6 mt-2 space-y-1">
+              <li><strong>Exercise:</strong> Exercise increases NAD+ demand; supplementation may support recovery and adaptation</li>
+              <li><strong>Hydrogen therapy:</strong> Both target mitochondrial function and oxidative stress</li>
+              <li><strong>Ketogenic diet:</strong> May support mitochondrial function alongside NAD+</li>
+              <li><strong>Other mitochondrial support:</strong> CoQ10, PQQ, and other mitochondrial nutrients</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="font-semibold mb-2">Risks & Considerations</h3>
+            <ul class="list-disc pl-6 space-y-1">
+              <li>NAD+ precursors may deplete methyl donors; consider B vitamin support (B12, folate)</li>
+              <li>High doses may cause flushing or digestive upset</li>
+              <li>IV NAD+ requires medical supervision</li>
+              <li>Not a standalone cure; should be part of a comprehensive approach</li>
+              <li>Long-term safety data still emerging</li>
+            </ul>
+          </div>
+
+          <div class="bg-muted p-4 rounded-lg">
+            <p class="font-semibold mb-2">Summary</p>
+            <p>
+              NAD+ support is an adjunct therapy that may help address mitochondrial dysfunction and support cellular repair in Parkinson's. It works best as part of a comprehensive protocol that includes exercise, diet, and other evidence-based interventions. It is not a replacement for core therapies but may provide additional support for brain health and energy production.
+            </p>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {protocol.slug === "mito-stack" && (
+      <div class="rounded-2xl border border-slate-200/60 bg-card text-card-foreground shadow-sm">
+        <div class="flex flex-col space-y-1.5 p-6">
+          <h3 class="text-2xl font-semibold leading-none tracking-tight text-slate-800">Example Stack Components (Evidence-Informed)</h3>
+          <p class="text-sm text-slate-600">(Not medical advice — consult a provider)</p>
+        </div>
+        <div class="p-6 pt-0">
+          <ul class="space-y-3 text-slate-600">
+            <li class="flex items-start">
+              <span class="font-semibold text-slate-900 min-w-[200px]">CoQ10 (Ubiquinol):</span>
+              <span>300–1200 mg/day</span>
+            </li>
+            <li class="flex items-start">
+              <span class="font-semibold text-slate-900 min-w-[200px]">PQQ:</span>
+              <span>10–40 mg/day</span>
+            </li>
+            <li class="flex items-start">
+              <span class="font-semibold text-slate-900 min-w-[200px]">Alpha-Lipoic Acid (ALA):</span>
+              <span>300–600 mg/day</span>
+            </li>
+            <li class="flex items-start">
+              <span class="font-semibold text-slate-900 min-w-[200px]">Acetyl-L-Carnitine (ALCAR):</span>
+              <span>500–1500 mg/day</span>
+            </li>
+            <li class="flex items-start">
+              <span class="font-semibold text-slate-900 min-w-[200px]">Magnesium:</span>
+              <span>200–400 mg/day (glycinate or threonate)</span>
+            </li>
+            <li class="flex items-start">
+              <span class="font-semibold text-slate-900 min-w-[200px]">B-complex:</span>
+              <span>Supports mitochondrial enzymes and NAD+ pathways</span>
+            </li>
+            <li class="flex items-start">
+              <span class="font-semibold text-slate-900 min-w-[200px]">Creatine:</span>
+              <span>3–5 g/day (supports ATP regeneration)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    )}
+
+    {protocol.slug === "stem-cells" && (
+      <div class="rounded-2xl border border-slate-200/60 bg-card text-card-foreground shadow-sm">
+        <div class="flex flex-col space-y-1.5 p-6">
+          <h3 class="text-2xl font-semibold leading-none tracking-tight text-slate-800">⚠️ Why Mesenchymal Stem Cells (MSCs) Are Not Ideal for Neuron Replacement in PD</h3>
+          <p class="text-slate-600">Many clinics use MSCs because they are easy to harvest—but they have major limitations for Parkinson's disease:</p>
+        </div>
+        <div class="p-6 pt-0 space-y-6">
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-2">1. MSCs cannot reliably become dopaminergic neurons</h4>
+            <ul class="space-y-2 text-slate-600 pl-6 list-disc">
+              <li>MSCs are multipotent, not pluripotent.</li>
+              <li>They naturally form fat, cartilage, bone, not neurons.</li>
+              <li>"Dopaminergic differentiation" in lab studies is typically incomplete and unstable.</li>
+            </ul>
+            <p class="mt-3 text-slate-700 font-medium">📌 Meaning: MSCs support the brain, but do NOT rebuild the substantia nigra.</p>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-2">2. Benefits come from paracrine effects (support), not replacement</h4>
+            <p class="text-slate-600 mb-2">MSCs improve:</p>
+            <ul class="space-y-1 text-slate-600 pl-6 list-disc">
+              <li>inflammation</li>
+              <li>oxidative stress</li>
+              <li>mitochondrial function</li>
+              <li>cell survival</li>
+            </ul>
+            <p class="mt-3 text-slate-600">…but do not replace lost neurons.</p>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-2">3. Autologous MSC potency declines with age</h4>
+            <p class="text-slate-600 mb-2">Older adults have:</p>
+            <ul class="space-y-1 text-slate-600 pl-6 list-disc">
+              <li>fewer MSCs</li>
+              <li>more senescent cells</li>
+              <li>reduced mitochondrial capacity</li>
+              <li>lower regenerative potential</li>
+            </ul>
+            <p class="mt-3 text-slate-600">This reduces efficacy in PD-aged patients (usually >55).</p>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-2">4. Better neuron-replacement options exist</h4>
+            <p class="text-slate-600 mb-2">More advanced approaches:</p>
+            <ul class="space-y-1 text-slate-600 pl-6 list-disc">
+              <li>iPSC-derived dopaminergic progenitors</li>
+              <li>neural stem cells (NSCs)</li>
+              <li>fetal progenitor cell lines (restricted availability)</li>
+            </ul>
+            <p class="mt-3 text-slate-600">These CAN become dopamine neurons and integrate into the striatum—MSCs cannot.</p>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-2">5. Clinical results with MSCs show modest but real support—not dramatic recovery</h4>
+            <p class="text-slate-600 mb-2">Most human MSC PD trials show:</p>
+            <ul class="space-y-1 text-slate-600 pl-6 list-disc">
+              <li>mild to moderate improvements</li>
+              <li>reduced inflammation</li>
+              <li>slight movement/sleep improvements</li>
+            </ul>
+            <p class="mt-3 text-slate-600">…but no reversal of disease.</p>
+          </div>
+
+          <div class="border-t border-slate-200 pt-6">
+            <h4 class="font-semibold text-lg text-slate-900 mb-3">Who May Benefit the Most</h4>
+            <ul class="space-y-2 text-slate-600 pl-6 list-disc">
+              <li>Individuals with high inflammatory markers</li>
+              <li>Those with metabolic issues impacting mitochondrial function</li>
+              <li>Early to mid-stage PD (not end-stage)</li>
+              <li>Those combining stem cells with strong metabolic/mitochondrial protocols</li>
+              <li>Patients using stem cells for support, not neuron replacement</li>
+            </ul>
+          </div>
+
+          <div class="bg-slate-100 p-4 rounded-lg">
+            <p class="font-semibold mb-2 text-slate-900">⭐ Summary</p>
+            <p class="text-slate-600">
+              Autologous stem cell therapy offers biological support, not true dopaminergic neuron replacement. It is most effective as part of a comprehensive protocol that includes mitochondrial support, NAD+, hydrogen therapy, exercise, ketogenic or low-insulin diet strategies, and gut optimization. It is expensive, experimental, and best suited for individuals who understand its supportive—not curative—role in Parkinson's disease.
+            </p>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {protocol.slug === "microbiome" && (
+      <div class="rounded-2xl border border-slate-200/60 bg-card text-card-foreground shadow-sm">
+        <div class="flex flex-col space-y-1.5 p-6">
+          <h3 class="text-2xl font-semibold leading-none tracking-tight text-slate-800">Common Components of a PD-Focused Microbiome Strategy</h3>
+          <p class="text-sm text-slate-600">(Not medical advice — example framework)</p>
+        </div>
+        <div class="p-6 pt-0 space-y-6">
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-3">1. Restore beneficial species</h4>
+            <ul class="space-y-2 text-slate-600 pl-6 list-disc">
+              <li>Probiotics tailored to butyrate production (Clostridia clusters IV & XIVa)</li>
+              <li>Hydrogen-producing species (Prevotella support via diet)</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-3">2. Feed beneficial bacteria</h4>
+            <ul class="space-y-2 text-slate-600 pl-6 list-disc">
+              <li>Prebiotic fibers: inulin, partially hydrolyzed guar gum, GOS, resistant starch</li>
+              <li>Polyphenols (berries, greens, teas)</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-3">3. Reduce inflammatory species</h4>
+            <ul class="space-y-2 text-slate-600 pl-6 list-disc">
+              <li>Diet modulation</li>
+              <li>Herbal antimicrobials if indicated</li>
+              <li>Improved motility (magnesium, hydration, exercise)</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-3">4. Enhance metabolites</h4>
+            <ul class="space-y-2 text-slate-600 pl-6 list-disc">
+              <li>Butyrate supplements</li>
+              <li>Fermented foods (if tolerated)</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-3">5. Support gut–brain axis</h4>
+            <ul class="space-y-2 text-slate-600 pl-6 list-disc">
+              <li>Vagus nerve stimulation</li>
+              <li>Stress-reduction techniques</li>
+              <li>Anti-inflammatory diet</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {protocol.slug === "movement" && (
+      <div class="rounded-2xl border border-slate-200/60 bg-card text-card-foreground shadow-sm">
+        <div class="flex flex-col space-y-1.5 p-6">
+          <h3 class="text-2xl font-semibold leading-none tracking-tight text-slate-800">Effective Modalities for PD</h3>
+          <p class="text-slate-600">All of the following show documented benefits:</p>
+        </div>
+        <div class="p-6 pt-0 space-y-6">
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-2">1. Aerobic exercise</h4>
+            <ul class="space-y-1 text-slate-600 pl-6 list-disc mb-3">
+              <li>Treadmill walking</li>
+              <li>Cycling (especially forced-rate cycling)</li>
+              <li>Jogging / brisk walking</li>
+              <li>Rowing or elliptical</li>
+            </ul>
+            <p class="text-slate-600 italic">Improves dopamine signaling, cardiovascular health, and gait speed.</p>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-2">2. Resistance training</h4>
+            <ul class="space-y-1 text-slate-600 pl-6 list-disc mb-3">
+              <li>Weightlifting</li>
+              <li>Bodyweight training</li>
+              <li>Resistance bands</li>
+            </ul>
+            <p class="text-slate-600 italic">Improves strength, posture, bone density, and functional independence.</p>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-2">3. Balance & stability training</h4>
+            <ul class="space-y-1 text-slate-600 pl-6 list-disc mb-3">
+              <li>Tai chi</li>
+              <li>Yoga</li>
+              <li>BOSU/unstable surface training</li>
+            </ul>
+            <p class="text-slate-600 italic">Reduces fall risk and improves proprioception.</p>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-2">4. Functional movement patterns</h4>
+            <ul class="space-y-1 text-slate-600 pl-6 list-disc mb-3">
+              <li>Agility ladders</li>
+              <li>Step training</li>
+              <li>Dual-task coordination</li>
+            </ul>
+            <p class="text-slate-600 italic">Enhances real-world mobility and reduces freezing.</p>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-2">5. Dance & rhythm-based movement</h4>
+            <ul class="space-y-1 text-slate-600 pl-6 list-disc mb-3">
+              <li>Tango</li>
+              <li>Ballroom</li>
+              <li>Boxing-style classes</li>
+            </ul>
+            <p class="text-slate-600 italic">Improves coordination, timing, cueing, and motor planning.</p>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {protocol.slug === "supplements" && (
+      <div class="rounded-2xl border border-slate-200/60 bg-card text-card-foreground shadow-sm">
+        <div class="flex flex-col space-y-1.5 p-6">
+          <h3 class="text-2xl font-semibold leading-none tracking-tight text-slate-800">Common Components of a PD-Oriented Daily Supplement Stack</h3>
+          <p class="text-sm text-slate-600">(Not medical advice — example framework only)</p>
+        </div>
+        <div class="p-6 pt-0 space-y-6">
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-3">Core Nutrients</h4>
+            <ul class="space-y-2 text-slate-600 pl-6 list-disc">
+              <li>Vitamin D3 + K2 (optimal blood level ~40–60 ng/mL)</li>
+              <li>Vitamin B12 (methylcobalamin)</li>
+              <li>Folate (methylfolate)</li>
+              <li>Vitamin B6 (P5P form, moderate doses only)</li>
+              <li>Magnesium glycinate or threonate</li>
+              <li>Omega-3s (DHA/EPA)</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-3">Mitochondrial Support</h4>
+            <ul class="space-y-2 text-slate-600 pl-6 list-disc">
+              <li>CoQ10 (ubiquinol)</li>
+              <li>Alpha-lipoic acid (ALA)</li>
+              <li>PQQ</li>
+              <li>Acetyl-L-carnitine (ALCAR)</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-3">Antioxidant Support</h4>
+            <ul class="space-y-2 text-slate-600 pl-6 list-disc">
+              <li>Vitamin C</li>
+              <li>Vitamin E (mixed tocopherols)</li>
+              <li>NAC or glutathione precursors</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-3">Gut/Microbiome Support</h4>
+            <ul class="space-y-2 text-slate-600 pl-6 list-disc">
+              <li>Probiotics</li>
+              <li>Prebiotics (inulin, resistant starch)</li>
+              <li>Butyrate supplements</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-lg text-slate-900 mb-3">Additional Support</h4>
+            <ul class="space-y-2 text-slate-600 pl-6 list-disc">
+              <li>Creatine (ATP buffering)</li>
+              <li>Zinc / selenium (antioxidant enzymes)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {protocol.products && protocol.products.length > 0 && (
+      <div class="rounded-2xl border border-slate-200/60 bg-card text-card-foreground shadow-sm">
+        <div class="flex flex-col space-y-1.5 p-6">
+          <h3 class="text-2xl font-semibold leading-none tracking-tight text-slate-800">Recommended Products (Trusted Options)</h3>
+          <p class="text-slate-600">Below are vetted, high-quality, PD-appropriate hydrogen therapy products:</p>
+        </div>
+        <div class="p-6 pt-0 space-y-8">
+          {protocol.products.map((product, index) => (
+            <div class="border-t border-slate-200 pt-8 first:border-t-0 first:pt-0">
+              <div class="space-y-4">
+                <div>
+                  <h4 class="font-semibold text-base text-slate-500 mb-2">
+                    {index + 1}. {product.category}
+                  </h4>
+                  <h5 class="font-semibold text-xl text-slate-900 mb-2">
+                    {product.name}
+                  </h5>
+                  <p class="text-slate-600">{product.description}</p>
+                </div>
+                
+                <div>
+                  <ul class="list-disc pl-6 space-y-1 text-slate-600">
+                    <li><strong>Pros:</strong> {product.pros.join(", ")}</li>
+                    <li><strong>Best for:</strong> {product.bestFor}</li>
+                  </ul>
+                </div>
+
+                <div class="mt-4">
+                  <a
+                    href={product.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="background-color: #000; color: #fff; padding: 0.625rem 1.5rem;"
+                    class="inline-flex items-center gap-2 text-sm font-medium rounded-full hover:shadow-lg transition-all"
+                  >
+                    View Product
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: #fff;">
+                      <path d="M7 7h10v10"></path>
+                      <path d="M7 17 17 7"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div class="rounded-2xl border border-slate-200/60 bg-card text-card-foreground shadow-sm">
+      <div class="flex flex-col space-y-1.5 p-6">
+        <h3 class="text-2xl font-semibold leading-none tracking-tight text-slate-800">Selected References</h3>
+      </div>
+      <div class="p-6 pt-0">
+        <ul class="space-y-3">
+          {protocol.references.map((ref) => (
+            <li class="text-sm">
+              {ref.url ? (
+                <a href={ref.url} target="_blank" rel="noopener noreferrer" class="text-slate-900 hover:underline cursor-pointer font-semibold">
+                  {ref.label}
+                </a>
+              ) : (
+                <strong>{ref.label}</strong>
+              )}
+              : {ref.citation}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="pt-6">
+      <BackButton client:load />
+    </div>
+  </div>
+</Layout>
+
