@@ -1,7 +1,7 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import BackButton from '../../../components/BackButton';
-import { getProtocolBySlug, getAllProtocolSlugs } from '../../../lib/protocolsConfig';
+import Layout from '../../layouts/Layout.astro';
+import BackButton from '../../components/BackButton';
+import { getProtocolBySlug, getAllProtocolSlugs } from '../../lib/protocolsConfig';
 
 export async function getStaticPaths() {
   const slugs = getAllProtocolSlugs();

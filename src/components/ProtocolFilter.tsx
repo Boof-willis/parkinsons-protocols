@@ -149,7 +149,7 @@ export default function ProtocolFilter({
           {currentList.map((item, index) => (
             <a
               key={item.slug}
-              href={`/pd/protocols/${item.slug}`}
+              href={`/protocols/${item.slug}`}
               className="group rounded-2xl bg-white ring-1 ring-slate-200/60 p-4 sm:p-6 shadow-lg shadow-slate-900/5 transition-all hover:shadow-xl hover:shadow-slate-900/10 hover:-translate-y-0.5"
             >
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-2">
