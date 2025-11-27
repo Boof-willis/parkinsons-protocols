@@ -1,178 +1,354 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import BackButton from '../components/BackButton';
 ---
 
 <Layout>
-  <div class="max-w-4xl mx-auto px-4 sm:px-8 md:px-12 space-y-8 optimize-rendering" style="padding-top: 5rem; padding-bottom: 5rem;">
+  <div class="max-w-4xl mx-auto px-4 sm:px-8 md:px-12 space-y-8" style="padding-top: 5rem; padding-bottom: 5rem;">
     <div>
-      <BackButton client:load />
+      <a
+        href="/"
+        class="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium hover:bg-accent mb-6"
+      >
+        ← Back to Protocols
+      </a>
       <h1 class="text-4xl font-bold mb-4">The Science Behind Parkinson's Disease</h1>
       <p class="text-lg text-muted-foreground">
-        A comprehensive overview of the mechanisms, contributing factors, and evidence-based approaches to understanding and addressing Parkinson's disease.
+        A comprehensive overview of the mechanisms, contributing factors, and evidence-based approaches involved in Parkinson's disease.
       </p>
     </div>
 
-    <section class="space-y-4">
-      <h2 class="text-2xl font-semibold">Brain Mechanisms</h2>
-      <div class="space-y-3">
-        <p>
-          Parkinson's disease is fundamentally characterized by the progressive loss of dopaminergic neurons in the substantia nigra, a region of the brain critical for movement control. This neuronal loss leads to a depletion of dopamine, a neurotransmitter essential for smooth, coordinated movement.
-        </p>
-        <p>
-          <strong>Mitochondrial dysfunction</strong> is a core feature of PD. The mitochondria, the energy-producing organelles within cells, appear to be particularly vulnerable in dopaminergic neurons. This dysfunction leads to reduced ATP production and increased oxidative stress.
-        </p>
-        <p>
-          <strong>Oxidative stress</strong> occurs when there's an imbalance between free radicals (reactive oxygen species) and the body's antioxidant defenses. In PD, this oxidative stress damages cellular components, including proteins, lipids, and DNA.
-        </p>
-        <p>
-          <strong>α-Synuclein aggregation</strong> is another hallmark of PD. This protein can misfold and clump together, forming Lewy bodies that are toxic to neurons. The spread of these aggregates throughout the brain may contribute to disease progression.
-        </p>
+    <div class="rounded-2xl border border-slate-200/60 bg-card text-card-foreground shadow-sm">
+      <div class="flex flex-col space-y-1.5 p-6">
+        <h2 class="text-2xl font-semibold leading-none tracking-tight text-slate-800">1. Brain Mechanisms</h2>
       </div>
-    </section>
+      <div class="p-6 pt-0 space-y-4">
+        <p>Parkinson's disease is characterized by the progressive loss of dopaminergic neurons in the substantia nigra pars compacta. This results in reduced dopamine levels and impaired movement regulation. Several underlying biological mechanisms contribute to this neuronal loss.</p>
+        
+        <div>
+          <h3 class="font-semibold text-lg mb-2 text-slate-900">Mitochondrial Dysfunction</h3>
+          <p class="mb-2">Dopaminergic neurons require large amounts of energy. In PD, mitochondrial complex I activity is impaired, leading to:</p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>reduced ATP production</li>
+            <li>elevated oxidative stress</li>
+            <li>impaired cellular energy metabolism</li>
+          </ul>
+          <p class="mt-2">Mitochondrial dysfunction is one of the most replicated findings in PD research.</p>
+        </div>
 
-    <section class="space-y-4">
-      <h2 class="text-2xl font-semibold">Gut and Microbiome Involvement</h2>
-      <div class="space-y-3">
-        <p>
-          The <strong>gut-brain axis</strong> represents a bidirectional communication system between the gastrointestinal tract and the central nervous system. Emerging evidence suggests that gut health may play a crucial role in Parkinson's disease.
-        </p>
-        <p>
-          <strong>Dysbiosis</strong>—an imbalance in the gut microbiome—is consistently observed in PD patients. This includes reductions in beneficial bacteria and increases in potentially harmful species. Notably, PD patients often show reduced levels of <strong>hydrogen-producing bacteria</strong>, which may be significant given the potential neuroprotective effects of molecular hydrogen.
-        </p>
-        <p>
-          Changes in the gut microbiome may contribute to PD through several mechanisms:
-        </p>
-        <ul class="list-disc pl-6 space-y-2">
-          <li>Altered production of neurotransmitters and metabolites that affect the brain</li>
-          <li>Increased intestinal permeability ("leaky gut"), allowing harmful substances to enter circulation</li>
-          <li>Activation of the immune system and chronic inflammation</li>
-          <li>Impact on the vagus nerve, which directly connects the gut to the brain</li>
-        </ul>
-        <p>
-          <strong>Fecal microbiota changes</strong> in PD patients are well-documented, with specific bacterial species consistently altered. This has led to interest in interventions like fecal microbiota transplant (FMT) and targeted probiotics to restore a healthier microbiome.
-        </p>
+        <div>
+          <h3 class="font-semibold text-lg mb-2 text-slate-900">Oxidative Stress</h3>
+          <p class="mb-2">Oxidative stress arises when reactive oxygen species overwhelm the body's antioxidant defenses. In PD, oxidative stress damages:</p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>proteins</li>
+            <li>lipids</li>
+            <li>DNA</li>
+            <li>mitochondria</li>
+          </ul>
+          <p class="mt-2">This accelerates dopaminergic neuron degeneration.</p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-lg mb-2 text-slate-900">α-Synuclein Aggregation</h3>
+          <p class="mb-2">α-Synuclein is a presynaptic protein that can misfold and accumulate into Lewy bodies, which are toxic to neurons. Misfolded α-synuclein can propagate between cells, potentially spreading pathology throughout the brain.</p>
+          <p>Research suggests α-synuclein aggregation may begin outside the brain, particularly in the gut or olfactory system, before reaching the central nervous system.</p>
+        </div>
       </div>
-    </section>
+    </div>
 
-    <section class="space-y-4">
-      <h2 class="text-2xl font-semibold">Insulin Resistance and "Type 3 Diabetes"</h2>
-      <div class="space-y-3">
-        <p>
-          The brain requires significant amounts of glucose for energy. <strong>Insulin resistance in the brain</strong>—sometimes referred to as "type 3 diabetes"—may contribute to Parkinson's disease progression.
-        </p>
-        <p>
-          When brain cells become resistant to insulin, they struggle to take up glucose effectively, leading to energy deficits. This is particularly problematic for neurons, which have high energy demands. Insulin resistance may also contribute to inflammation and oxidative stress.
-        </p>
-        <p>
-          Some researchers have proposed that PD may share mechanisms with type 2 diabetes, including impaired insulin signaling. This has led to interest in interventions that improve insulin sensitivity, such as:
-        </p>
-        <ul class="list-disc pl-6 space-y-2">
-          <li>Ketogenic and low-glycemic diets that reduce glucose spikes</li>
-          <li>Exercise, which improves insulin sensitivity</li>
-          <li>Medications that enhance insulin signaling (though research is preliminary)</li>
-        </ul>
+    <div class="rounded-2xl border border-slate-200/60 bg-card text-card-foreground shadow-sm">
+      <div class="flex flex-col space-y-1.5 p-6">
+        <h2 class="text-2xl font-semibold leading-none tracking-tight text-slate-800">2. Gut and Microbiome Involvement</h2>
       </div>
-    </section>
+      <div class="p-6 pt-0 space-y-4">
+        <p>The gut-brain axis represents a bidirectional communication network between the gastrointestinal system and the brain. Increasing evidence indicates the gut may play a significant role in Parkinson's disease.</p>
+        
+        <div>
+          <h3 class="font-semibold text-lg mb-2 text-slate-900">Gut Dysbiosis</h3>
+          <p class="mb-2">PD patients consistently exhibit:</p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>reduced Prevotella and hydrogen-producing bacteria</li>
+            <li>reduced short-chain fatty-acid producers (Faecalibacterium, Roseburia)</li>
+            <li>increased inflammatory species such as Enterobacteriaceae</li>
+            <li>altered bile acid metabolism</li>
+          </ul>
+        </div>
 
-    <section class="space-y-4">
-      <h2 class="text-2xl font-semibold">Heavy Metals and Environmental Toxins</h2>
-      <div class="space-y-3">
-        <p>
-          Epidemiological studies have linked exposure to <strong>heavy metals</strong>—including lead, mercury, manganese, and others—to an increased risk of Parkinson's disease. These metals can accumulate in the brain and cause oxidative stress, mitochondrial dysfunction, and direct damage to neurons.
-        </p>
-        <p>
-          <strong>Pesticides and herbicides</strong>, particularly paraquat and rotenone, have also been associated with PD risk. These compounds may damage dopaminergic neurons through mechanisms similar to those seen in the disease itself.
-        </p>
-        <p>
-          While not all PD patients have elevated metal levels, addressing potential toxic exposures and supporting the body's natural detoxification pathways may be beneficial for some individuals. This should be done under medical supervision with proper testing.
-        </p>
+        <div>
+          <h3 class="font-semibold text-lg mb-2 text-slate-900">Key Gut-Related Mechanisms</h3>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>Disrupted neurotransmitter and metabolite production</li>
+            <li>Increased intestinal permeability ("leaky gut")</li>
+            <li>Systemic inflammation from microbial toxins such as LPS</li>
+            <li>α-Synuclein propagation through the vagus nerve</li>
+            <li>Altered gut motility and constipation years before motor symptoms</li>
+          </ul>
+          <p class="mt-2">These findings support therapeutic approaches such as targeted probiotics, dietary interventions, and fecal microbiota transplant (FMT).</p>
+        </div>
       </div>
-    </section>
+    </div>
 
-    <section class="space-y-4">
-      <h2 class="text-2xl font-semibold">Chronic Infections</h2>
-      <div class="space-y-3">
-        <p>
-          <strong>Oral and dental infections</strong> may contribute to systemic inflammation that could impact Parkinson's disease. Chronic gum disease (periodontitis) has been linked to increased inflammation throughout the body, and some research suggests connections between oral health and neurodegenerative diseases.
-        </p>
-        <p>
-          <strong>Gut infections</strong> and imbalances in gut bacteria may also play a role. Certain pathogenic bacteria can produce toxins or trigger inflammatory responses that may affect the brain through the gut-brain axis.
-        </p>
-        <p>
-          <strong>Parasites</strong> (speculative): While less well-established, some researchers have explored whether certain parasites might contribute to PD in some cases. This remains highly speculative and requires much more research. Any connection would likely be indirect, through inflammation or immune system effects.
-        </p>
-        <p>
-          Addressing chronic infections through proper dental care, gut health optimization, and appropriate medical treatment may help reduce systemic inflammation and support overall health.
-        </p>
+    <div class="rounded-2xl border border-slate-200/60 bg-card text-card-foreground shadow-sm">
+      <div class="flex flex-col space-y-1.5 p-6">
+        <h2 class="text-2xl font-semibold leading-none tracking-tight text-slate-800">3. Insulin Resistance and "Type 3 Diabetes"</h2>
       </div>
-    </section>
+      <div class="p-6 pt-0 space-y-4">
+        <p>Insulin is critical for brain energy regulation. In Parkinson's disease, neurons frequently show insulin resistance, impairing their ability to utilize glucose and maintain metabolism.</p>
+        
+        <div>
+          <h3 class="font-semibold text-lg mb-2 text-slate-900">Effects of Brain Insulin Resistance</h3>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>impaired glucose uptake</li>
+            <li>reduced ATP production</li>
+            <li>increased inflammation</li>
+            <li>increased oxidative stress</li>
+            <li>impaired neuronal survival</li>
+          </ul>
+          <p class="mt-2">PD shares mechanistic features with type 2 diabetes, including mitochondrial dysfunction and impaired insulin signaling.</p>
+        </div>
 
-    <section class="space-y-4">
-      <h2 class="text-2xl font-semibold">The Role of Lifestyle</h2>
-      <div class="space-y-3">
-        <h3 class="text-xl font-semibold">Exercise</h3>
-        <p>
-          Regular exercise is among the most evidence-based interventions for Parkinson's disease. Exercise can improve motor symptoms, balance, and strength. It may also have <strong>neuroprotective effects</strong> by increasing brain-derived neurotrophic factor (BDNF), supporting neuroplasticity, and potentially slowing disease progression.
-        </p>
-
-        <h3 class="text-xl font-semibold">Sleep</h3>
-        <p>
-          Sleep disturbances are common in PD and may worsen symptoms. Restorative sleep is essential for brain health, cellular repair, and clearing waste products. Optimizing sleep hygiene and addressing sleep disorders may improve quality of life and potentially support brain health.
-        </p>
-
-        <h3 class="text-xl font-semibold">Diet</h3>
-        <p>
-          Diet can influence multiple pathways involved in PD, including inflammation, oxidative stress, gut health, and insulin sensitivity. Approaches like the ketogenic diet, Mediterranean diet, and anti-inflammatory diets may provide benefits. The gut microbiome is also heavily influenced by dietary choices.
-        </p>
+        <div>
+          <h3 class="font-semibold text-lg mb-2 text-slate-900">Interventions That Improve Insulin Sensitivity</h3>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>ketogenic diet</li>
+            <li>low-glycemic diet</li>
+            <li>regular exercise</li>
+            <li>GLP-1 agonists (investigational in PD)</li>
+            <li>fasting or time-restricted eating</li>
+          </ul>
+        </div>
       </div>
-    </section>
+    </div>
 
-    <section class="space-y-4">
-      <h2 class="text-2xl font-semibold">Key References</h2>
-      <div class="space-y-3 text-sm">
-        <p>
-          <strong>Sampson et al., 2016.</strong> Gut microbiota regulate motor deficits and neuroinflammation in a model of Parkinson's disease. <em>Science</em>, 353(6307), 1246-1256. <em>Demonstrates gut microbiome's role in PD using animal models.</em>
-        </p>
-        <p>
-          <strong>Scheperjans et al., 2015.</strong> Gut microbiota are related to Parkinson's disease and clinical phenotype. <em>Movement Disorders</em>, 30(3), 350-358. <em>Human study showing microbiome differences in PD patients.</em>
-        </p>
-        <p>
-          <strong>Yoritaka et al., 2013.</strong> Pilot study of H2 therapy in Parkinson's disease: A randomized double-blind placebo-controlled trial. <em>Movement Disorders</em>, 28(6), 836-839. <em>Early human trial of hydrogen therapy in PD.</em>
-        </p>
-        <p>
-          <strong>Phillips et al., 2018.</strong> Low-fat versus ketogenic diet in Parkinson's disease: A pilot randomized controlled trial. <em>Movement Disorders</em>, 33(8), 1306-1314. <em>Clinical trial comparing dietary approaches in PD.</em>
-        </p>
-        <p>
-          <strong>Athauda & Foltynie, 2016.</strong> The glucagon-like peptide 1 (GLP-1) receptor as a therapeutic target in Parkinson's disease. <em>Drug Discovery Today</em>, 21(5), 802-818. <em>Review of insulin resistance and PD connection.</em>
-        </p>
-        <p>
-          <strong>Gorell et al., 1997.</strong> Occupational exposures to metals as risk factors for Parkinson's disease. <em>Neurology</em>, 48(3), 650-658. <em>Epidemiological study linking metal exposure to PD risk.</em>
-        </p>
-        <p>
-          <strong>Schenkman et al., 2018.</strong> Effect of high-intensity treadmill exercise on motor symptoms in patients with de novo Parkinson disease. <em>JAMA Neurology</em>, 75(2), 219-226. <em>Clinical trial demonstrating exercise benefits in PD.</em>
-        </p>
-        <p>
-          <strong>Ahlskog, 2011.</strong> Does vigorous exercise have a neuroprotective effect in Parkinson disease? <em>Neurology</em>, 77(3), 288-294. <em>Review of exercise's potential neuroprotective effects.</em>
-        </p>
-        <p>
-          <strong>Schondorf et al., 2018.</strong> The NAD+ precursor nicotinamide riboside rescues mitochondrial defects and neuronal loss in iPSC and fly models of Parkinson's disease. <em>Cell Reports</em>, 23(10), 2976-2988. <em>Preclinical study of NAD+ in PD models.</em>
-        </p>
-        <p>
-          <strong>Shults et al., 2002.</strong> Effects of coenzyme Q10 in early Parkinson disease. <em>Archives of Neurology</em>, 59(10), 1541-1550. <em>Clinical trial of CoQ10 for mitochondrial support.</em>
-        </p>
-        <p>
-          <strong>Hamblin, 2016.</strong> Shining light on the head: Photobiomodulation for brain disorders. <em>BBA Clinical</em>, 6, 113-124. <em>Review of light therapy mechanisms and potential applications.</em>
-        </p>
-        <p>
-          <strong>Barker et al., 2015.</strong> Cell-based therapies for Parkinson disease—past insights and future potential. <em>Nature Reviews Neurology</em>, 11(9), 492-503. <em>Comprehensive review of stem cell approaches in PD.</em>
-        </p>
+    <div class="rounded-2xl border border-slate-200/60 bg-card text-card-foreground shadow-sm">
+      <div class="flex flex-col space-y-1.5 p-6">
+        <h2 class="text-2xl font-semibold leading-none tracking-tight text-slate-800">4. Heavy Metals and Environmental Toxins</h2>
       </div>
-    </section>
+      <div class="p-6 pt-0 space-y-4">
+        <p>Exposure to environmental toxins is a major risk factor for Parkinson's.</p>
+        
+        <div>
+          <h3 class="font-semibold text-lg mb-2 text-slate-900">Heavy Metals</h3>
+          <p class="mb-2">Epidemiological studies link exposure to:</p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>manganese</li>
+            <li>lead</li>
+            <li>mercury</li>
+            <li>iron overload</li>
+          </ul>
+          <p class="mt-2">These metals can accumulate in the brain and cause oxidative stress, mitochondrial disruption, and dopaminergic neuron toxicity.</p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-lg mb-2 text-slate-900">Pesticides and Herbicides</h3>
+          <p class="mb-2">Two pesticides are strongly associated with PD:</p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>Paraquat</li>
+            <li>Rotenone</li>
+          </ul>
+          <p class="mt-2">Both impair mitochondrial function and produce PD-like pathology in animal models.</p>
+          <p class="mt-2 italic">Detoxification should be guided by professional testing and medical supervision.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rounded-2xl border border-slate-200/60 bg-card text-card-foreground shadow-sm">
+      <div class="flex flex-col space-y-1.5 p-6">
+        <h2 class="text-2xl font-semibold leading-none tracking-tight text-slate-800">5. Chronic Infections and Inflammation</h2>
+      </div>
+      <div class="p-6 pt-0 space-y-4">
+        <div>
+          <h3 class="font-semibold text-lg mb-2 text-slate-900">Oral Infections</h3>
+          <p>Gum disease and other chronic dental infections contribute to systemic inflammation, which may exacerbate neurodegeneration.</p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-lg mb-2 text-slate-900">Gut Infections</h3>
+          <p>Pathogenic bacteria can produce toxins or trigger immune responses affecting the central nervous system.</p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-lg mb-2 text-slate-900">Parasites</h3>
+          <p>Research is limited and speculative, but parasitic infections may influence systemic inflammation or gut permeability, indirectly affecting PD progression.</p>
+        </div>
+
+        <p class="mt-4">Improving dental health, treating gut imbalances, and reducing chronic inflammation can support overall neurological health.</p>
+      </div>
+    </div>
+
+    <div class="rounded-2xl border border-slate-200/60 bg-card text-card-foreground shadow-sm">
+      <div class="flex flex-col space-y-1.5 p-6">
+        <h2 class="text-2xl font-semibold leading-none tracking-tight text-slate-800">6. Lifestyle Factors</h2>
+      </div>
+      <div class="p-6 pt-0 space-y-4">
+        <div>
+          <h3 class="font-semibold text-lg mb-2 text-slate-900">Exercise</h3>
+          <p class="mb-2">Exercise is among the strongest evidence-based interventions for PD. Benefits include:</p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>improved motor symptoms</li>
+            <li>increased balance and strength</li>
+            <li>enhanced neuroplasticity</li>
+            <li>increased BDNF production</li>
+            <li>potential slowing of disease progression</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-lg mb-2 text-slate-900">Sleep</h3>
+          <p>Sleep disturbances worsen inflammation, oxidative stress, and cognitive decline. Optimizing sleep improves the brain's waste-clearing systems (glymphatic function).</p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-lg mb-2 text-slate-900">Diet</h3>
+          <p class="mb-2">Diet influences inflammation, microbiome composition, and insulin sensitivity. Diets with evidence of benefit include:</p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>ketogenic diet</li>
+            <li>Mediterranean diet</li>
+            <li>anti-inflammatory dietary patterns</li>
+          </ul>
+          <p class="mt-2">Dietary strategies also support mitochondrial health and metabolic stability.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rounded-2xl border border-slate-200/60 bg-card text-card-foreground shadow-sm">
+      <div class="flex flex-col space-y-1.5 p-6">
+        <h2 class="text-2xl font-semibold leading-none tracking-tight text-slate-800">Key References (with Links)</h2>
+      </div>
+      <div class="p-6 pt-0 space-y-4">
+        <div>
+          <h3 class="font-semibold text-base mb-2 text-slate-900">Gut & Microbiome</h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="https://pubmed.ncbi.nlm.nih.gov/27708053/" target="_blank" rel="noopener noreferrer" class="text-slate-900 hover:underline cursor-pointer font-semibold">
+                Sampson et al., 2016
+              </a>. Science.
+            </li>
+            <li>
+              <a href="https://pubmed.ncbi.nlm.nih.gov/25476529/" target="_blank" rel="noopener noreferrer" class="text-slate-900 hover:underline cursor-pointer font-semibold">
+                Scheperjans et al., 2015
+              </a>. Movement Disorders.
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-base mb-2 text-slate-900">Hydrogen Therapy</h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="https://pubmed.ncbi.nlm.nih.gov/23580369/" target="_blank" rel="noopener noreferrer" class="text-slate-900 hover:underline cursor-pointer font-semibold">
+                Yoritaka et al., 2013
+              </a>. Movement Disorders.
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-base mb-2 text-slate-900">Ketogenic Diet</h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="https://pubmed.ncbi.nlm.nih.gov/29920881/" target="_blank" rel="noopener noreferrer" class="text-slate-900 hover:underline cursor-pointer font-semibold">
+                Phillips et al., 2018
+              </a>. Movement Disorders.
+            </li>
+            <li>
+              <a href="https://pubmed.ncbi.nlm.nih.gov/15728214/" target="_blank" rel="noopener noreferrer" class="text-slate-900 hover:underline cursor-pointer font-semibold">
+                Vanitallie et al., 2005
+              </a>. Neurology.
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-base mb-2 text-slate-900">Insulin Resistance & GLP-1</h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="https://pubmed.ncbi.nlm.nih.gov/26921641/" target="_blank" rel="noopener noreferrer" class="text-slate-900 hover:underline cursor-pointer font-semibold">
+                Athauda & Foltynie, 2016
+              </a>. Drug Discovery Today.
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-base mb-2 text-slate-900">Heavy Metals & Toxins</h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="https://pubmed.ncbi.nlm.nih.gov/9065545/" target="_blank" rel="noopener noreferrer" class="text-slate-900 hover:underline cursor-pointer font-semibold">
+                Gorell et al., 1997
+              </a>. Neurology.
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-base mb-2 text-slate-900">Exercise</h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="https://pubmed.ncbi.nlm.nih.gov/29235628/" target="_blank" rel="noopener noreferrer" class="text-slate-900 hover:underline cursor-pointer font-semibold">
+                Schenkman et al., 2018
+              </a>. JAMA Neurology.
+            </li>
+            <li>
+              <a href="https://pubmed.ncbi.nlm.nih.gov/21775761/" target="_blank" rel="noopener noreferrer" class="text-slate-900 hover:underline cursor-pointer font-semibold">
+                Ahlskog, 2011
+              </a>. Neurology.
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-base mb-2 text-slate-900">Mitochondrial & NAD+</h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="https://pubmed.ncbi.nlm.nih.gov/29874566/" target="_blank" rel="noopener noreferrer" class="text-slate-900 hover:underline cursor-pointer font-semibold">
+                Schondorf et al., 2018
+              </a>. Cell Reports.
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-base mb-2 text-slate-900">Mitochondrial Support</h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="https://pubmed.ncbi.nlm.nih.gov/12374491/" target="_blank" rel="noopener noreferrer" class="text-slate-900 hover:underline cursor-pointer font-semibold">
+                Shults et al., 2002
+              </a>. Archives of Neurology.
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-base mb-2 text-slate-900">Photobiomodulation</h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="https://pubmed.ncbi.nlm.nih.gov/26969166/" target="_blank" rel="noopener noreferrer" class="text-slate-900 hover:underline cursor-pointer font-semibold">
+                Hamblin, 2016
+              </a>. BBA Clinical.
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-base mb-2 text-slate-900">Stem Cells</h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="https://pubmed.ncbi.nlm.nih.gov/26289130/" target="_blank" rel="noopener noreferrer" class="text-slate-900 hover:underline cursor-pointer font-semibold">
+                Barker et al., 2015
+              </a>. Nature Reviews Neurology.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
     <div class="pt-6">
-      <BackButton client:load />
+      <a
+        href="/"
+        class="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium hover:bg-accent"
+      >
+        ← Back to Protocols
+      </a>
     </div>
   </div>
 </Layout>
-
